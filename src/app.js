@@ -8,6 +8,8 @@ const app = express();
 app.use(express.json({ limit: "100kb" }));
 app.use(cookieParser());
 
+app.use(requestMiddleware.checkRequestOrigin);
+
 //GET health api
 app.use("/api", healthRouter);
 
