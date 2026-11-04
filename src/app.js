@@ -28,6 +28,7 @@ app.use((req, res) => {
   });
 });
 
+// express's global error handler -- a special type of middleware
 app.use((err, req, res, next) => {
   if (res.headersSent) return next(err);
   if (err.type === "entity.too.large")
