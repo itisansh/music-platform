@@ -1,20 +1,20 @@
 import express from "express";
-import userAuth from "../middlewares/auth.middleware.js";
 import authController from "../controllers/auth.controller.js";
-import requestMiddleware from "../middlewares/request.middleware.js";
+import userModel from "../models/user.model.js";
 
 const router = express.Router();
 
 // POST /register
-router.post(
-  "/register",
-  requestMiddleware.authLimiter,
-  authController.registerUser,
-);
-router.post("/login", requestMiddleware.authLimiter, authController.loginUser);
-router.post("/logout", userAuth, authController.logoutUser);
+router.post("/register", authController.registerUser);
+router.post("/login", authController.loginUser);
+router.post("/logout", authController.logoutUser);
 
 //test
-router.get("/me", userAuth, authController.getMe);
-
+router.get("/test", async (req, res) => {
+  const users = await userModel.find({});
+  return res.status(200).json({
+    message: "successfuly user retrieved",
+    users,
+  });
+});
 export default router;

@@ -159,19 +159,4 @@ async function logoutUser(req, res) {
   });
 }
 
-async function getMe(req, res) {
-  try {
-    const user = req.user;
-    return res.status(200).json({
-      message: "successfuly user retrieved",
-      user,
-    });
-  } catch (error) {
-    console.log("error has occured", error);
-    return res.status(401).json({
-      message: "missing/bad/expired cookie",
-    });
-  }
-}
-
-export default { registerUser, loginUser, logoutUser, getMe };
+export default { registerUser, loginUser, logoutUser };
